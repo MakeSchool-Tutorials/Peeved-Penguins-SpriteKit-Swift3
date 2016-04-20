@@ -3,24 +3,24 @@ title: Penguin launcher
 slug: physics-penguin
 ---
 
-Ready to try out the catapult on our penguins?
+Ready to try out the catapult on the penguins?
 
-We know how to add a new penguin to the scene, this time when we add a new penguin we're going to pin joint it to the catapult and then release it when the player lets go of the catapult and let nature take its course.  Let's add a new *penguinJoint* for this very purpose.
+You already know how to dynamically add a new penguin to the scene, this time when you add a new penguin you're going to pin joint it to the catapult arm and then release it when the player lets go of the catapult arm and watch physics in action.  Let's add a new *penguinJoint* for this purpose.
+
+#Pinning the penguin
 
 > [action]
-> Add this property your the *GameScene* class:
+> Add this property to your *GameScene* class:
 >
 ```
 var penguinJoint: SKPhysicsJointPin?
 ```
 >
 
-#Spawn a sticky penguin
-
-When a touch begins, we need to spawn a penguin and pin it to the bucket of the catapult arm.
+When the player touch begins, you want to spawn a penguin and then pin it to the bucket area of the catapult arm.
 
 > [action]
-> Add this code to the `touchesBegan(...)` method immediately after the touchJoint code:
+> Add this code to the `touchesBegan(...)` method immediately after the **touchJoint** code:
 >
 ```
 /* Add a new penguin to the scene */
@@ -42,13 +42,13 @@ cameraTarget = penguin.avatar
 ```
 >
 
-Most of this should be fairly easy to understand by now, the code is very similar to the original test launcher.
-We have stripped out the manual impulse and instead pinned the penguin to the catapult arm, waiting for the player to let go.
+Most of this should be fairly easy to understand for you by now.  The code is very similar to the original beta launcher.  The manual impulse has been removed and replaced with create a pin joint between the penguin and the catapult arm.  This joint will be maintained until the player releases their touch.
 
-#Let it go
+##Let it go
 
-As in the previous chapter, we need to release this *penguinJoint* when the player releases their touch.
-See if you can add this joint removal yourself.
+As in the previous chapter, you need to release the *penguinJoint* when the player releases their touch.
+
+Can you add this joint removal yourself?
 
 > [solution]
 > Add the following to the `touchesEnded(...)` method:
@@ -60,22 +60,31 @@ if let penguinJoint = penguinJoint { physicsWorld.removeJoint(penguinJoint) }
 
 #Tuning
 
-Now run the game and shoot a couple of penguins! It's important that everything feels right. If you like you can do a little of tuning now (an important part of building physics games). SpriteKit makes it very easy to change different physics properties, such as mass, friction, etc:
+Now run the game and launch a couple of penguins! It's very important that everything feels right for the player.
+Tuning your physics simulation is very important, what might be realistic may not be much fun.  You're aiming to get that balance just right and hit the sweet spot.
 
-Let's try a tweak on our catapult, if you notice when the game starts the catapult looks like it's swinging in the breeze.  We can make a really easy tweak to make this look better.  Let's disable gravity on our catapultArm, this will stop it falling over and then being pulled by the spring joint, causing this see saw type action.
+SpriteKit makes it very easy to change different physics properties, such as mass, friction, etc:
+
+Let's try a tweak on our catapult, if you notice when the game starts the catapult looks like it's swinging in the breeze.  You can apply an easy tweak to make this look better.  
+
+Let's remove gravity on the catapultArm, this will stop the see-saw effect.
 
 > [action]
-> Disable gravity on the catpault arm.
->
+> Change this body property to:
 ```
 catapultArmBody.affectedByGravity = false
 ```
 >
 
-Run the game... looking better :)
+Run your game... Looking tight.
 
 #Summary
 
-Well done! Now you have a first fully playable prototype. You've learnt how to launch a physics body indirectly using your catapult mode.
+Well done! You have the first fully playable prototype build.
 
-In the next chapter we will start turning this into an actual game.
+You've learnt how to:
+
+- Launch a physics body indirectly using your catapult
+- Tweaking physics to improve the simulation
+
+In the next chapter you will be working with physics contacts and collisions.

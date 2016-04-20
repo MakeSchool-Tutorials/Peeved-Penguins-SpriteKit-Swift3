@@ -5,46 +5,58 @@ slug: ipad-compatible
 
 SpriteKit allows you to adapt your game for the iPad without having to supply new assets and only requires making a few small changes.
 
-Try running your project on an iPad to see what happens...
+#iPad Tweaks
+
+Try running your game on an iPad to see what happens...
 
 You will most likely notice the following:
 
 - The main menu is useable, although it looks zoomed in.
 - The main game is unplayable.
-- It's running in portrait mode :]
+- It's probably running in portrait mode!
 
-Let's fix the orientation issue, we only ever want this game to use Landscape.
+Let's fix the orientation issue first, as this game should only ever be ran in landscape.
 
 > [action]
 > Open *info.plist* and expand the options at the bottom.
-> You will notice the *iPad orientation* options contain **Portrait** options, remove these.
+> Notice the *iPad orientation* options contain **Portrait** options, remove these.
+>
 > ![Penguin animation](../Tutorial-Images/xcode_info_plist.png)
 
-Run the game again, it should be Landscape now and note the issues above.
+Run your game again, it should be landscape only now.
 
-#Aspect
+##Aspect
 
-Currently we are using a scene *scaleMode* or `.AspectFill` which looks great on the iPhone devics.  However, for the iPad we are missing too much of the game out.  Let's modify `.AspectFill` to `.AspectFit`.
+Currently you are using a scene *scaleMode* or `.AspectFill` which looks great on the iPhone.  However, for the iPad you can't see all of the game content.  Let's try another scale mode.
 
 > [action]
 > Switch to the *Find Navigator* tab and search for `AspectFill`
+>
 > ![Search](../Tutorial-Images/xcode_project_search.png)
 >
-> Replace all finds with `.AspectFit`
+> Replace all results of `.AspectFill` with `.AspectFit`
+>
 
-Run the game.
+Run your game...
 
-Looks good, a bit of letterbox however more than acceptable. Some games simply add a bit of decoration in this space.
+Looking better, the only minor point is the letterbox effect.  However, this is more than acceptable for the minimal amount of work required to achieve this compatibility.  Some games simply add a decoration border to fill this space.
+
 Yet the *GameScene* does not look quite right.
 
 ![iPad Broken](../Tutorial-Images/screenshot_ipad_broken.png)
 
-So close!
+Oh so close...
 
-This is an easy fix, to ensure everything is centered correctly we need to change the *GameScene* scene attributes to use an anchor point of `(0.5,0.5)`
+This is actually an easy fix, it helps if all nodes are centered correctly.
 
-Now run the game, looking good :)
 
-#Well done!
+> [action]
+> Open *GameScene.sks*, select the scene and set *Anchor point* to `(0.5,0.5)`
 
-You now have a fully functional iPad game!
+Run your game... YES! :]
+
+#Summary
+
+Congrats on finishing *Peeved Penguins*, give yourself or the person next to you a high five.
+
+The next chapter will be a recap of everything you have covered so far, well done.

@@ -1,9 +1,9 @@
 ---
-title: Getting started with Peeved Penguins!
+title: Getting started with Peeved Penguins
 slug: getting-started
 ---
 
-In this tutorial we will build Peeved Penguins -- a clone of the classic mobile game [Angry Birds](https://itunes.apple.com/us/app/angry-birds/id343200656?mt=8). We will use Apple's Swift programming language together with SpriteKit their game development framework.
+In this tutorial you will build Peeved Penguins -- a clone of the classic mobile game [Angry Birds](https://itunes.apple.com/us/app/angry-birds/id343200656?mt=8). You will be using Apple's Swift programming language together with SpriteKit their game development framework.
 
 #What you will learn
 

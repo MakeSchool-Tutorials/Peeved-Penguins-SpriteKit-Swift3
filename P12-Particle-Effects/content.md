@@ -1,11 +1,11 @@
 ---
-title: Add Particle Effects
+title: Particle Effects
 slug: particle-effect
 ---
 
-Now we are going to add an Angry Bird style particle effect whenever a seal gets eliminated. SpriteKit has a great integrated particle effect designer which we are going to use to define the style of our first particle effect.
+Now you are going to add an Angry Bird style particle effect whenever a seal gets eliminated. SpriteKit has a great integrated particle effect designer which we are going to use to define the style of our first particle effect.
 
-#Create a new particle effect
+#Creating a new particle effect
 
 > [action]
 > Create a new particle effect `File > New > File > SpriteKit Particle File`
@@ -13,16 +13,14 @@ Now we are going to add an Angry Bird style particle effect whenever a seal gets
 > ![SpriteKit Particle File](../Tutorial-Images/xcode_spritekit_add_particle.png)
 >
 > ![SpriteKit Particle File](../Tutorial-Images/xcode_spritekit_add_particle_template.png)
-
-Now SpriteKit will open up the *Smoke* particle.
+>
 
 ![SpriteKit Particle Black Smoke](../Tutorial-Images/animated_black_smoke.gif)
 
-I ended up making a more subtle smoke effect. You can copy the property values shown or feel free to go crazy and create your own
-unique look.
+I ended up making a more subtle smoke effect. You can copy the property values shown or feel free to go crazy and create your own unique look.
 
 > [action]
-> Particle atrributes:
+> Particle attributes:
 >
 > ![Particle Attributes 1](../Tutorial-Images/xcode_spritekit_particle_1.png)
 >
@@ -31,19 +29,18 @@ unique look.
 > ![Particle Attributes 2](../Tutorial-Images/xcode_spritekit_particle_2.png)
 >
 
-This should look like this now:
+This should look something like that:
 
 ![SpriteKit Particle Grey Smoke](../Tutorial-Images/animated_grey_smoke.gif)
 
+Feel free to spend some time playing around with different values.
 
-Feel free to spend as much time as you like playing around with different values and options as we will not discuss them in detail now.
+##Adding the particle effect to our collision
 
-#Adding the particle effect to our collision
-
-We are now going to add some code that runs our particle effect whenever a seal gets eliminated.
+Let's add some code that adds the particle effect to the scene whenever a seal gets eliminated.
 
 > [action]
-> Add the following code to the start our *didSeal* method:
+> Add the following code to the start of the `didSeal` method:
 >
 ```
 /* Load our particle effect */
@@ -60,8 +57,10 @@ addChild(particles)
 ```
 >
 
-The most is explained in the comments of this snippet. We load a particle effect and place it on the seals position directly before we remove the seal from the scene. We control the length of the particle by setting the *numParticlesToEmit*, this takes a bit of trial and error to get a value that looks right.
+You load a particle effect and place it at the seals's position directly before the seal is removed from the scene. The runtime of the particle can be controlled by setting the *numParticlesToEmit*, it's not super logical so it takes a bit of trial and error to get a value that looks and feels right.
 
 #Summary
 
 Well done! Now you know how to create particle effects and make them play when certain events in your game occur.
+
+In the next chapter you will be adding animated penguins to the sidelines.

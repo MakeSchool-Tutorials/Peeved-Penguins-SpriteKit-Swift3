@@ -1,28 +1,29 @@
 ---
-title: Physics Tuning
-slug: physics-tuning
+title: Working with contacts and collisions
+slug: physics-contact-collisions
 ---
 
-Now you'll learn how to setup the physics body *Contact Masks* and use that knowledge to remove seals when they are crashed into by penguins or ice blocks!
+Next you'll learn how to setup the physics body *Contact Masks* and use that knowledge to remove seals when they are hit by penguins, ice blocks or even each other.
 
 #The Physics contact delegate
 
-SpriteKit already takes care of moving objects around when they collide. What you as developer need to do is to add *meaning* to different kinds of collisions. In our game for example, a meaningful collision is one between a *seal* and any other object in the game.
+What you as developer need to do is to add *meaning* to different kinds of collisions. In the game a meaningful collision is one between a *seal* and any other object in the game.
 
-In SpriteKit we can do this by implementing a certain delegate. In Swift the concept of delegates is always used when one object signs up to get informed on certain events. The one we need to use to get informed about collisions in SpriteKit is called *SKPhysicsContactDelegate*. Let's add this protocol to *GameScene.swift*, so that we can get information on the collisions going on in our game.
+In SpriteKit you can do this by implementing the *SKPhysicsContactDelegate*. Let's add this protocol to the *GameScene* class, so you can get information on the collision going on the game.
 
 > [action]
-> Change the beginning of the GameScene class to implement the *SKPhysicsContactDelegate*:
+> Modify the GameScene class decleration implement the *SKPhysicsContactDelegate*:
 >
 ```
 class GameScene: SKScene, SKPhysicsContactDelegate {
 ```
 >
 
-Now that we've adopted the contact delegate protocol, we need to sign up to the contact delegate.
+Now that you've adopted the contact delegate protocol, you need to sign up to receive events generated
+by the contact delegate.
 
 > [action]
-> Add this line to `didMoveToView(...)`:
+> Add this code to `didMoveToView(...)`:
 >
 ```
 /* Set physics contact delegate */
@@ -34,23 +35,23 @@ physicsWorld.contactDelegate = self
 
 In SpriteKit each *physicsBody* has a property called *categoryBitMask*. This category is typically used to identify different participants in a collision.
 
-You remember that we setup our penguin with a **Category Mask** of `1` and our seal with `2`. When a collision takes place we will be checking the *categoryBitMask* for a value of `2` to identify when a seal has been involved.
+You remember that you setup the penguin with a **Category Mask** of `1` and the seal with `2`. When a collision takes place you will be checking the *categoryBitMask* for a value of `2` to identify when a seal has been involved in a collision.
 
-By default SpriteKit will not inform you of any collisions, I'm sure you've noticed the *Contact Mask* property when setting up your physics bodies.  By default they are all `0` so our *contactDelegate* will never be informed.
+By default SpriteKit will not inform you of any collisions, I'm sure you've spotted the *Contact Mask* property when setting up physics bodies.  By default they are all `0` so our *contactDelegate* will never be informed of any collisions taking place.
 
-Our use case is straightforward, if anything hits a seal (even seal on seal) we want to know about it.
+This use case is pretty straightforward, if **anything** collides with a seal (even seal on seal) you want to be informed.
 
 > [action]
-> Open *Seal.sks* and set *Contact Mask* to `1`.
+> Open *Seal.sks* and clicl on the seal, set *Contact Mask* to `1`.
 
-Now we will able to informed when any seals participate in a collision.
+Now anytime a seal is involved in a collision you will be informed through the contact delegate.
 
 #Implementing a delegate method
 
-Now we need to implement the *beginContact(...)* delegate method that will inform us when any collisions occur.
+You will need to implement the *beginContact(...)* delegate method that will inform you of any valid collision contacts.
 
 > [action]
-> Now add this method to our *GameScene* class:
+> Add this method to the *GameScene* class:
 >
 ```
 func didBeginContact(contact: SKPhysicsContact) {
@@ -73,21 +74,26 @@ func didBeginContact(contact: SKPhysicsContact) {
 ```
 >
 
-Run the game and cause a collision with a seal. You should see the log message appear in the console.
-You may notice you a few seal hits at the start, currently it's super sensitive, even adding the *Level1.sks* to the scene the sealw will mostly likely, gently collide with the ground.
+Run your game...
 
-#Remove a seal when it get's hit hard
+You should see the log message appear in the console every time a seal is hit.  You may notice you a few seal hits at the start, currently this code is super sensitive, the act of adding *Level1.sks* to the scene will mostly generate a contact event as the seal gently touches the ground when they are first added to the scene.
 
-Now that we know that the collision handler is working, let's implement the actual functionality. Based on the *collisionImpulse* of the collision, we will decide if a seal will be removed or not. We're also going to set up a separate seal removal method, because we will want to add some more functionality to it.
+#Hitting on seals, hard
+
+Now that you know that the collision handler is working, let's implement the real functionality. What you want is a way to check how hard the seal was hit and use that to decided if you should ignore the collision or destroy the seal.  
+
+SpriteKit to the rescue, you can utilize the *collisionImpulse* property of the collision to gauge the resulting impact force from the collision.
+
+To keep things clean let's setup a separate seal removal method. You'll be adding more functionality to this method later.
 
 > [action]
-> Replace
+> Replace:
 >
 ```
 print("Seal Hit")
 ```
 >
-> with
+> with:
 >
 ```
 /* Was the collision more than a gentle nudge? */
@@ -100,10 +106,12 @@ if contact.collisionImpulse > 2.0 {
 ```
 >
 
-What exactly are we doing here? First we retrieve the kinetic energy of the collision between the seal and a second object. If this energy is large enough we decide to remove the seal by using the *dieSeal* method.
+##Removing the seal
+
+First you retrieve the collision impulse between the seal and the other object. If this impulse is large enough you decide to remove the seal by using the *dieSeal* method.
 
 > [action]
-> Finally add the *dieSeal* method to your code:
+> Add the *dieSeal* method to your *GameScene* class:
 >
 ```
 func dieSeal(node: SKNode) {
@@ -121,11 +129,17 @@ func dieSeal(node: SKNode) {
 ```
 >
 
-This code should be fairly familiar, yet why can't we just call `removeFromParent()` directly, why do we need to wrap it in an action?
-Well in the physics world we need to ensure that the seal is removed at the right time, in the SpriteKit frame render cycle there is a post-physics step called *didSimulatePhysics* after the physics simulation is complete for the current frame.  It is at this point that it's safe to remove a physics body, otherwise you can run into problems with triggering collisions on nodes that have just been removed, resulting in a crash.  If we wrap this in an action, SpriteKit will ensure it's executed at the right time in the cycle.
+This code should be fairly familiar, yet one does not simply call`removeFromParent()` directly...
+
+In the physics simulation you need to ensure that the seal is removed at the right time, in the SpriteKit frame render cycle there is a **post-physics** step called *didSimulatePhysics* after the physics simulation is complete for the current frame.  At this point it's safe to remove a physics body, otherwise you can run into problems with triggering collisions on bodies that have been removed, resulting in a horrible game crash.  If you wrap this in an *SKAction*, SpriteKit will ensure it's executed at the right time in the render cycle.
 
 #Summary
 
-You've implemented the physics **contact delegate**, used the **categoryBitMask** to validate which physics body has collided and used additional information from the collision to only remove our seals if they reach a certain collision thresh hold.
+The game mecanic is nearly finished, you've learnt to:
 
-The game is getting to the final stages, let's add a little bit of polish next.
+- Implement the physics *SKPhysicsContactDelegate*
+- Using the **categoryBitMask** to identify physics bodies in a collision
+- Using **SKPhysicsContact** to evaluate the collision force between two bodies
+- Removing the seal cleanly from the scene
+
+In the next chapter it's time to add a little polish.

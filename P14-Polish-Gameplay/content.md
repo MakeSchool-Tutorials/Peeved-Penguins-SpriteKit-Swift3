@@ -3,14 +3,18 @@ title: Polish the Gameplay
 slug: improve-gameplay
 ---
 
-Currently a player can only shoot once. The camera will follow the flying penguin, but won't scroll back to the catapult when the attempt is completed. We will change that in this chapter. The rule will be as follows: If a penguin has stopped or is moving slowly we will remove the penguin and move the camera back to the catapult and reset the catapult arm itself.
+Currently a player can only shoot once. The camera will follow the flying penguin, but won't scroll back to the catapult when the attempt is completed. You are going to that in this chapter.
 
-We will have to check if this condition becomes *true* on a regular basis - we can use the update method to do so.
+The rule will be as follows:
 
-#Implementing the update method
+If a penguin has stopped or is moving slowly we will remove the penguin and move the camera back to the catapult and reset the catapult arm itself.
+
+You will have to check if this condition becomes *true* on a regular basis, where do you think this check should be made?
+
+#Implementing the check
 
 > [action]
-> Add the following code after camera clamp in `update(...)`
+> Add the following code after the camera clamp in `update(...)`
 ```
 /* Check penguin has come to rest */
 if cameraTarget.physicsBody?.joints.count == 0 && cameraTarget.physicsBody?.velocity.length() < 0.18 {
@@ -31,24 +35,25 @@ if cameraTarget.physicsBody?.joints.count == 0 && cameraTarget.physicsBody?.velo
 }
 ```
 
-While this may look a little complicated at first, what actually is going on is only a tiny bit of math. We check whether the speed is below our defined limit. Therefore we use the *length* function that calculates the square length of our velocity (basically the x- and y-component of the speed combined). The value of `0.18` was through testing, tweak to your own liking.
+While this may look a little complicated at first, what actually is going on is only a tiny bit of math. You want to check whether the **speed** of the penguin has come to reset (or near rest).
+The *length* function that calculates the square length of the velocity (basically the x and y component of the speed combined).
 
-This solution is a little bit fancy as we are using `cameraTarget.physicsBody?.joints.count` to check if the penguin has been fired.
-The **cameraTarget** is the penguin and while it is attached to the catapultArm with a joint it will have a **joint.count** of 1.  This is a quick way to check this, another way would be to use another property to track the fire state of the penguin.
+There is an issue with this check, it works well once the penguin has been launched.  However, when the penguin is being pulled back on the catapult it will have a **speed** or *length* less than the limit of `0.18`.
+
+You can use `cameraTarget.physicsBody?.joints.count` to check if the penguin has been fired.
+The **cameraTarget** will point to the penguin and while the penguin it is attached to the catapultArm there will be a joint attached to it, giving the  **joint.count** a value of `1`.  This is a quick way to check this, another slightly more involved way would be to use another property to track the *State* of the penguin. e.g. `Loading, Launched`
 
 > [challenge]
-> I omitted another scenario here, what if the penguin somehow leaves the borders of the game scene? How would you check for this?
+> I omitted another scenario here, what if the penguin somehow leaves the borders of the game scene? How would you check if the penguins position was out of the *GameScene*
 
-#Reseting the camera on next launch
+#Reset the camera
 
-You may have noticed a problem here, what if the player tries to launch another penguin before the camera has scrolled all the way back.
-Well not a major issue however be nice to stop the camera moving.
+You may have noticed another slight Ux issue here, what if the player tries to launch another penguin before the camera has scrolled all the way back.?
 
-This can be corrected by removing the *moveTo* action from the camera, let's do this when a new penguin is attached to the catapult.
+This can be corrected by stopping the *moveTo* action that's being applied to the camera, let's do this when a new penguin becomes attached to the catapult.
 
 > [action]
-> Add the following code to `touchesBegan(...)`
-> Just before:
+> Add the following code to `touchesBegan(...)`, just before:
 >
 ```
 /* Set camera to follow penguin */
@@ -63,11 +68,13 @@ camera?.removeAllActions()
 
 ##Final tweak
 
-Let's get rid of the red nodes, an easy way to hide them visibly is to modify the *Z* to `-2` e.g. behind the background.  The visibility of a physics node has no effect on the physics simulation.
+Let's get rid of the red box static nodes, an easy way to hide them using the editor is to modify the *Z-Position* to `-2` e.g. behind the background.  The visibility of a physics node has no effect on the physics simulation. Otherways to achieve this could be setting the sprite to have an *alpha* of `0` or set *hidden* to be `true`.
 
 #Summary
 
-You've learnt the importance of those 'finishing touches', it's often the little tweaks that take your game play to the next level.
-Always look for ways to improve your game mechanic and make it feel as satisfying as possible for the player.
+You've learnt the importance of making those **little touches**, it's often the small things when added together that can really take your game play to the next level and make the experience more memorable for the player.
 
-You are ready to move on to the next chapter where you will learn how you can make this game iPad compatible!
+Always look for ways to improve your game mechanic and make it feel as satisfying as possible for the player.
+Get feedback and iterate.
+
+In the next chapter where you will learn how you can make your game iPad compatible!
