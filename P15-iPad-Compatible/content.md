@@ -18,10 +18,10 @@ You will most likely notice the following:
 Let's fix the orientation issue first, as this game should only ever be ran in landscape.
 
 > [action]
-> Open *info.plist* and expand the options at the bottom.
-> Notice the *iPad orientation* options contain **Portrait** options, remove these.
+> Open *info.plist* and expand the list at the bottom.
+> Notice the *iPad orientation* values, remove any **Portrait** options.
 >
-> ![Penguin animation](../Tutorial-Images/xcode_info_plist.png)
+> ![Xcode plist](../Tutorial-Images/xcode_info_plist.png)
 
 Run your game again, it should be landscape only now.
 
