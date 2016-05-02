@@ -68,7 +68,7 @@ camera?.removeAllActions()
 
 ##Final tweak
 
-Let's get rid of the red box static nodes, an easy way to hide them using the editor is to modify the *Z-Position* to `-2` e.g. behind the background.  The visibility of a physics node has no effect on the physics simulation. Otherways to achieve this could be setting the sprite to have an *alpha* of `0` or set *hidden* to be `true`.
+Let's get rid of the red box static nodes, an easy way to hide them using the editor is to modify the *Z-Position* to `-2` e.g. behind the background.  The visibility of a physics node has no effect on the physics simulation. Other ways to achieve this could be setting the sprite to have an *alpha* of `0` or set *hidden* to be `true`.
 
 #Summary
 

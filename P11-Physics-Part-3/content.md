@@ -12,7 +12,7 @@ What you as developer need to do is to add *meaning* to different kinds of colli
 In SpriteKit you can do this by implementing the *SKPhysicsContactDelegate*. Let's add this protocol to the *GameScene* class, so you can get information on the collision going on the game.
 
 > [action]
-> Modify the GameScene class decleration implement the *SKPhysicsContactDelegate*:
+> Modify the GameScene class declaration implement the *SKPhysicsContactDelegate*:
 >
 ```
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -135,7 +135,7 @@ In the physics simulation you need to ensure that the seal is removed at the rig
 
 #Summary
 
-The game mecanic is nearly finished, you've learnt to:
+The game mechanic is nearly finished, you've learnt to:
 
 - Implement the physics *SKPhysicsContactDelegate*
 - Using the **categoryBitMask** to identify physics bodies in a collision

@@ -24,7 +24,8 @@ When the player touch begins, you want to spawn a penguin and then pin it to the
 >
 ```
 /* Add a new penguin to the scene */
-let penguin = MSReferenceNode(fileNamed: "Penguin") as MSReferenceNode!
+let resourcePath = NSBundle.mainBundle().pathForResource("Penguin", ofType: "sks")
+let penguin = MSReferenceNode(URL: NSURL (fileURLWithPath: resourcePath!))
 addChild(penguin)
 >
 /* Position penguin in the catapult bucket area */

@@ -54,11 +54,11 @@ Run your game... You should see the three penguins blinking and jumping for joy 
 
 ![Penguin animation](../Tutorial-Images/animated_penguins.gif)
 
-#Unsynchronize the animations
+#Desynchronize the animations
 
 The animation looks pretty good. However, it seems unnatural that all three penguins perform the `JumpAction` at the exact same time. This happens because our timeline actions all start at zero, this means the animation starts as soon as the object enters the scene.
 
-You improve this quite easily, click on each *JumpAction* in the timeline and modify the *Start Timer*, set it to `0` , `0.25` and `0.5` respectivley.
+You improve this quite easily, click on each *JumpAction* in the timeline and modify the *Start Timer*, set it to `0` , `0.25` and `0.5` respectively.
 
 Run your game...
 

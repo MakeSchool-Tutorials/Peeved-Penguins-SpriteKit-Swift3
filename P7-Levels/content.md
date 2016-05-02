@@ -72,7 +72,8 @@ levelNode = childNodeWithName("//levelNode")
 >
 ```
 /* Load Level 1 */
-let newLevel = SKReferenceNode(fileNamed: "Level1")
+let resourcePath = NSBundle.mainBundle().pathForResource("Level1", ofType: "sks")
+let newLevel = SKReferenceNode (URL: NSURL (fileURLWithPath: resourcePath!))
 levelNode.addChild(newLevel)
 ```
 >

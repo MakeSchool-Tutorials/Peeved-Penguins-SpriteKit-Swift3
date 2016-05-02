@@ -119,7 +119,7 @@ Run the game... Oh it doesn't work?
 
 ##Initializing the Main Scene
 
-Although the *MaineScene.sks* is displayed, it's not connected to your *MainScene.swift*. This is easly rectified.
+Although the *MaineScene.sks* is displayed, it's not connected to your *MainScene.swift*. This is easily rectified.
 
 > [action]
 > Open `GameViewController.swift`, remember this line:

@@ -16,7 +16,7 @@ Now it's time to start working on the good stuff, you're going to construct *Pen
 Remember the first game object you made? You will be adding the animated *Bear.sks* to the scene. SpriteKit lets you reference **.sks** files in other **.sks** files using a *SKReferenceNode*. This is a **super powerful** feature, and you will make extensive use of it.
 
 > [action]
-> Open *GameScene.sks* and drag the *Bear.sks* from the *Project Navigator* scene and place it ontop of the ground near the bottom-left.
+> Open *GameScene.sks* and drag the *Bear.sks* from the *Project Navigator* scene and place it on top of the ground near the bottom-left.
 > You will most likely need to do a quick *Save* of the *GameScene* to have the bear sprite show up in the *SKReferenceNode*.
 
 You should have something that hopefully looks a lot like this:
