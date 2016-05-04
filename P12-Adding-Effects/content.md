@@ -63,7 +63,7 @@ You load a particle effect and place it at the seals's position directly before 
 
 Adding sound effects is quite straight forward in SpriteKit, you can make use of the `playSoundFileNamed` *SKAction* to play sounds.
 
-Download the [SFX Starter Kit](../SFX.zip) we added for you. Once the download is complete, unpack the folder and add
+Download the [SFX Pack](../SFX.zip) we created for you. Once the download is complete, unpack the folder and add
 to the project.
 
 > [action]
@@ -80,6 +80,9 @@ Run the game... Let there be sound!
 
 #Summary
 
-Well done! Now you know how to create particle effects and make them play when certain events in your game occur.
+Well done! You learnt to:
+
+- Create your own custom particle effects and make them play when certain events in your game occur
+- Play SFX
 
 In the next chapter you will be adding animated penguins to the sidelines.

@@ -44,6 +44,8 @@ Let's take a look at what you have learned.
 
 - **Sprit frame animations**: Setting up more complex sprite frame based animations and using action properties such as start time to make a group animation look more natural.
 
+- **SFX**: Sound plays an important part in enhancing the game experience for the player, good use of sound can really help add that professional feel to a game.
+
 ##Device Compatibility
 - **iPad compatibility**: SpriteKit makes it easy to add iPad compatibility with minimal effort.
 
