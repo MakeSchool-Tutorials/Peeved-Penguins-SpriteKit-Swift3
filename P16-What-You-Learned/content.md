@@ -54,3 +54,7 @@ Let's take a look at what you have learned.
 [Download Peeved Penguins](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift-Solution).
 
 ![Github Cat](https://static.makegameswith.us/gamernews_images/TVZ2mTmQpl/labtocat.png)
+
+#Bonus stage
+
+If you've made it this far you're ready to face the **bonus stage**, although this content is optional.  I would highly recommend it as it will generate ideas for your own game ideas and give you some essential practical experience.  The challenges are designed to help you round off your game.
