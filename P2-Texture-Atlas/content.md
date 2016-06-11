@@ -12,7 +12,7 @@ Let's get started with a new SpriteKit project and look at the benefits of using
 > ![Xcode new project](../Tutorial-Images/xcode_new_project.png)
 >
 
-Now download the [Peeved Penguins art pack](../PeevedPenguinsAssets.zip) we created for you. Once the download is complete, unpack the folder.
+Now download the [Peeved Penguins art pack](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/PeevedPenguinsAssets.zip) we created for you. Once the download is complete, unpack the folder.
 
 ##Landscape
 
