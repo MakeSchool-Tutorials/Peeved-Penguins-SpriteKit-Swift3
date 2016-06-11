@@ -63,7 +63,7 @@ You load a particle effect and place it at the seals's position directly before 
 
 Adding sound effects is quite straight forward in SpriteKit, you can make use of the `playSoundFileNamed` *SKAction* to play sounds.
 
-Download the [SFX Pack](../SFX.zip) we created for you. Once the download is complete, unpack the folder and add
+Download the [SFX Pack](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/SFX.zip) we created for you. Once the download is complete, unpack the folder and add
 to the project.
 
 > [action]
