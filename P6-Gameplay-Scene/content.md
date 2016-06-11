@@ -42,7 +42,7 @@ Before modeling catapult physics we are going to implement a simple shooting mec
 
 > [info]
 > SpriteKit doesn't include any handy vector maths libraries out of the box, thankfully the internet tends provide :]
-> There is a handy collection of helper classes and functions called [SKTUtils](https://github.com/raywenderlich/SKTUtils), we've updated these to Swift 2.1 so please [Download SKTUtils.zip](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/SKUtils.zip), unzip it and add to your project.
+> There is a handy collection of helper classes and functions called [SKTUtils](https://github.com/raywenderlich/SKTUtils), we've updated these to Swift 2.1 so please [Download SKTUtils.zip](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/SKTUtils.zip), unzip it and add to your project.
 >
 
 Time for your to connect the catapult arm, spawn penguins and launch them into the stratosphere.
