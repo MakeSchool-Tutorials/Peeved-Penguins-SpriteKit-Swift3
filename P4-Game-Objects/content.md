@@ -52,7 +52,7 @@ There is one not so obvious issue you need to deal with, if you drag the penguin
 Thankfully we've already created a handy sub-class of *SKReferenceNode* called *MSReferenceNode* that will let you access the penguin sprite inside the penguin scene.
 
 > [action]
-> [Download MSReferenceNode.swift](https://raw.githubusercontent.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift-Solution/master/PeevedPenguin/MSReferenceNode.swift) and add it to your project. As always have a peak at the code.
+> [Download MSReferenceNode.swift](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift-Solution/raw/master/PeevedPenguinBuild/MSReferenceNode.swift) and add it to your project. As always have a peak at the code.
 
 You will be making use of the class in later chapters, it's important to set the *Name* of the sprite in the scene you require access.
 
