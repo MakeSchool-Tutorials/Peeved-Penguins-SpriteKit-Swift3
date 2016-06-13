@@ -65,7 +65,8 @@ class GameScene: SKScene {
 >    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Add a new penguin to the scene */
-        let penguin = MSReferenceNode(fileNamed: "Penguin")
+        let resourcePath = NSBundle.mainBundle().pathForResource("Penguin", ofType: "sks")
+        let penguin = MSReferenceNode(URL: NSURL (fileURLWithPath: resourcePath!))
         addChild(penguin)
 >        
         /* Move penguin to the catapult bucket area */
