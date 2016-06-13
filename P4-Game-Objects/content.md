@@ -65,7 +65,7 @@ Time to add the bad guys! The process of creating the seal will be very similar 
 
 #Creating the seal scene
 
-The process to add our cute but evil seal's is very similar to the penguin.
+The process to add our cute but evil seals is very similar to the penguin.
 
 > [challenge]
 > See how far along you can get setting up the *Seal.sks*, no peeking at the solution :]
@@ -91,7 +91,7 @@ Imagine the seal will act like a pin in ten-pin Bowling and the penguin will act
 >
 > The penguin has already taken the first *Category Mask* of `1` so the next logical category you can use will be `2` for the seal.
 >
-> You will also want to be alerted when the seal is involved in a collision with anything so you set the *Contact Mask* to `1`.
+> You will also want to be alerted when the seal is involved in a collision with the penguin so you set the *Contact Mask* to `1`.
 >
 
 That's it! You now have the core reusable game objects ready for action.
@@ -108,6 +108,7 @@ Call it whatever helps you relate.  These groups are virtual folders and do not 
 #Summary
 
 You learnt to:
+
 - Create reusable core game objects
 - Setup physics properties and tweak values
 - Use a custom class for the scene
