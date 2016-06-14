@@ -12,7 +12,7 @@ In this step you're going to turn the catapult and the catapult arm into physic 
 Don't understand why you need joints yet? Let's try it out.
 
 > [action]
-> Open *GameScene.sks* and enable physics on the **catapult** and **catapult** . Set *Body Type* to `Alpha mask`.
+> Open *GameScene.sks* and enable physics on the **catapult** and **catapultArm** . Set *Body Type* to `Alpha mask`.
 >
 
 Run your game...

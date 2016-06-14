@@ -10,8 +10,8 @@ Now you are going to setup the essential main menu screen. That start menu will 
 You are going to create a new *Scene* for the main menu.
 
 > [action]
-> Create a new SKS file (`File > New > File > SpriteKit Scene`) and name it `MainMenu.sks`
-> Set the main menu *Scene Size* to `(568,320)`
+> Create a new SKS file (`File > New > File > SpriteKit Scene`) and name it `MainScene.sks`
+> Set *Scene Size* to `(568,320)`
 >
 > ![MainScene attributes](../Tutorial-Images/xcode_new_mainscene_attributes.png)
 
