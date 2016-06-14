@@ -10,6 +10,7 @@ The game is looking good, it would be nice to start adding those little extra to
 > [action]
 > Create a new particle effect `File > New > File > SpriteKit Particle File`
 >
+> *Save as* `SealExplosion`
 > ![SpriteKit Particle File](../Tutorial-Images/xcode_spritekit_add_particle.png)
 >
 > ![SpriteKit Particle File](../Tutorial-Images/xcode_spritekit_add_particle_template.png)

@@ -11,8 +11,8 @@ Throughout this tutorial you will learn many concepts including how to:
 
 - Switch scenes from main menu to gameplay
 - Create a camera to follow the action
-- Using the SpriteKit physics engine
-- Utilizing physics joints to model a catapult
+- Use the SpriteKit physics engine
+- Utilize physics joints to model a catapult
 - Load levels from SKS files
 - Use the timeline to create character animations
 - Make a game that is compatible with both iPhone and iPad

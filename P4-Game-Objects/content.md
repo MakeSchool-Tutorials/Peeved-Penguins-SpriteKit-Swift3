@@ -28,7 +28,7 @@ The penguin is nearly ready for action, this is a physics based game so the peng
 ##Enabling physics
 
 > [action]
-> Click on the penguin is  and set the *Physics Definition* :
+> Click on the penguin and set the *Physics Definition*:
 >
 > ![Penguin physics definition](../Tutorial-Images/xcode_spritekit_penguin_physics_definition.png)
 >

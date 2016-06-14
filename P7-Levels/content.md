@@ -48,7 +48,7 @@ Here is one I made earlier:
 Now you are going to add some simple level loading code.
 
 > [action]
-> Open *GameScene.sks*
+> Open *GameScene.swift*
 > If you had any issue creating the `levelNode` code connection, here is a recap:
 >
 > Add this property to your class:
@@ -91,7 +91,8 @@ Try and hit the ice blocks...
 Oh no, you can't as the ice blocks don't have physics bodies.  SpriteKit let's work on multiple nodes which will make this task even easier.
 
 > [action]
-> Open *Level1.sks*, hold *Shift* and *Drag* a selection box across all of ice blocks.
+> Open *Level1.sks*, hold *cmd* and *drag* a selection box across the scene.
+> To deselect the seals, you can then hold *shift* and click on the corner of each seal carefully.
 >
 > Set *Body Type* to `Bounding rectangle`, all the default values are fine.
 

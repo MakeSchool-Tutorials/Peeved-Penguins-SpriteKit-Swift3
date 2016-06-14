@@ -36,7 +36,7 @@ The main menu needs a play button to trigger the transition into the *GameScene*
 If you've improved the *MSButtonNode* class in the *Hoppy Bunny Tutorial* and made it epic.  Please feel free to reuse it in this project.
 
 > [action]
-> ![Download MSButtonNode.swift](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/MSButtonNode.swift) and drag the file into your project, ensuring *Copy items if needed* is checked.
+> [Download MSButtonNode.swift](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/MSButtonNode.swift) and drag the file into your project, ensuring *Copy items if needed* is checked.
 
 Run the game...
 

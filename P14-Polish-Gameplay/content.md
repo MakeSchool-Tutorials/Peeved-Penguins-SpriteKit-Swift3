@@ -15,6 +15,7 @@ You will have to check if this condition becomes *true* on a regular basis, wher
 
 > [action]
 > Add the following code after the camera clamp in `update(...)`
+>
 ```
 /* Check penguin has come to rest */
 if cameraTarget.physicsBody?.joints.count == 0 && cameraTarget.physicsBody?.velocity.length() < 0.18 {
