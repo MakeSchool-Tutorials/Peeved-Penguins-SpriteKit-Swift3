@@ -32,7 +32,7 @@ You need to combine two images to make the bear, the body without an arm and a s
 <!--  -->
 
 > [action]
-> Add *bearnoarms.png* and set the *Anchor Point* to `(0,1)`, position it somewhere that looks sensible.
+> Add *beararm.png* and set the *Anchor Point* to `(0,1)`, position it somewhere that looks sensible.
 > Set the *Z* to `1` to ensure the arm is always on top of the body.
 >
 > ![Adding the bear arm asset](../Tutorial-Images/xcode_spritekit_add_bear_arm.png)
@@ -45,7 +45,7 @@ You need to set the anchor point of the arm because we are going to rotate it. W
 
 #Adding animation
 
-Now you can animate the polar bear's arm. In SpriteKit there is a default **Timeline** for adding animation actions.  However, you are going to use a more powerful feature and create shared animations, which are stored in a *SpriteKit Action* file, this gives you the power to reuse the custom animations your create with any node.
+Now you can animate the polar bear's arm. In SpriteKit there is a default **Timeline** for adding animation actions.  However, you are going to use a more powerful feature and create shared animations, which are stored in a *SpriteKit Action* file, this gives you the power to reuse the custom animations you create with any node.
 
 > [action]
 > Click on *+* to add a new timeline and name it `ArmAnimation`, when prompted to create a new file name it `CharacterActions.sks`.
