@@ -20,14 +20,9 @@ You need to combine two images to make the bear, the body without an arm and a s
 
 > [action]
 > Select *Bear.sks* and `Zoom Out` the scene so you can see the yellow border.
-> Drag *bearnoarms.png* in from your *Media Library* to the scene, I recommend you use **snap** to snap the *bearnoarms.png* to the bottom left corner of the scene.
+> Drag *bearnoarms.png* in from your *Media Library* to the scene, **snap** it to the bottom left corner of the scene.
 >
 > ![Adding the bear asset](../Tutorial-Images/xcode_spritekit_add_bearnoarm.png)
-
-<!--  -->
-
-> [info]
-> To use node snapping, you need to hold *Shift* while dragging your objects as of Xcode 7.2.1
 
 <!--  -->
 
@@ -41,7 +36,7 @@ You need to set the anchor point of the arm because we are going to rotate it. W
 
 > [info]
 >If you are wondering why the yellow scene size border is different than yours, I like to set the scene size to fit nicely around the content, so in this case I would set the scene to be the same size as the *Bear*.
-> It doesn't really matter for the bear as it's static content.  However, it does for other objects like the ?penguin which I will discuss later.
+> It doesn't really matter for the bear as it's static content.  However, it does for other objects like the penguin which I will discuss later.
 
 #Adding animation
 

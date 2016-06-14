@@ -71,12 +71,13 @@ catapultArm.physicsBody = catapultArmBody
 
 Run your game... The **catapultArm** simply falls over :[
 
-#Dat first joint :]
+#Your first joint
 
 Now time to create your first joint, you will be using *SKPhysicsJointPin* to connect the **catapult** and **catapultArm** together.
 
 > [action]
 > Add the following to the end of your `didMoveToView(...)` method:
+>
 ```
 /* Pin joint catapult and catapult arm */
 let catapultPinJoint = SKPhysicsJointPin.jointWithBodyA(catapult.physicsBody!, bodyB: catapultArm.physicsBody!, anchor: CGPoint(x:220 ,y:105))
@@ -189,7 +190,7 @@ touchNode = childNodeWithName("touchNode") as! SKSpriteNode
 
 ##Dynamic joints
 
-Next up you will be dynamically creating a sprint joint whenever the player touches the catapult arm to initiate pulling back the catapult.  It needs to be accessible to your class as when the player lets go of the catapult arm you need to destroy the joint, which in turn releases the catapult arm and sets everything in motion.
+Next up you will be dynamically creating a spring joint whenever the player touches the catapult arm to initiate pulling back the catapult.  It needs to be accessible to your class when the player lets go of the catapult arm you need to destroy the joint, which in turn releases the catapult arm and sets everything in motion.
 
 > [action]
 > Add this property to the *GameScene* class:

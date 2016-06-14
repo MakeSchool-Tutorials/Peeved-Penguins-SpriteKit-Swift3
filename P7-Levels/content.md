@@ -88,7 +88,7 @@ Run your game... You should see a hint of your level if you put an object near t
 
 Try and hit the ice blocks...
 
-Oh no, you can't as the ice blocks don't have physics bodies.  SpriteKit let's work on multiple nodes which will make this task even easier.
+Oh no, you can't as the ice blocks don't have physics bodies.  SpriteKit lets you work on multiple nodes which makes this task even easier.
 
 > [action]
 > Open *Level1.sks*, hold *cmd* and *drag* a selection box across the scene.

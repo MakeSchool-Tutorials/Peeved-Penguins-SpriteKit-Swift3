@@ -114,7 +114,7 @@ It would be nice to add a little impulse to the penguin. Imagine the penguin is 
 ```
 /* Impulse vector */
 let launchDirection = CGVector(dx: 1, dy: 0)
-let force = launchDirection * 400
+let force = launchDirection * 10
 >
 /* Apply impulse to penguin */
 penguin.avatar.physicsBody?.applyImpulse(force)
@@ -129,7 +129,7 @@ First your setup the force vector with a direction `(1,0)` e.g X = 1 (Right)
 > ![Vector direction](../Tutorial-Images/vector_impulse.gif)
 >
 
-Next you multiple this by `400` to ensure you hit the penguin with enough force to make it really fly!
+Next you multiple this by `10` to ensure you hit the penguin with enough force to make it fly!
 Please feel free to play with these values.
 
 Run your game... Your penguins should hopefully fly across the screen now.
