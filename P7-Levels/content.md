@@ -10,7 +10,7 @@ Time to design the first level.
 
 Now let's solve our first little puzzle. Problem: You want to be able to have an unlimited amount of levels in your game. Therefore you don't want the game mechanics (shooting, collision detection, etc.) to be part of the levels itself.  Otherwise you would be in big trouble if you wanted to change them -- you would need to apply the changes to every level. Which is possible just not very sensible :]
 
-This means your are not going to add the information about a level directly to your *GameScene.sks*. A better solution is to define an area in the *GameScene.sks* that is level specific and load the level data into that area.
+This means you are not going to add the information about a level directly to your *GameScene.sks*. A better solution is to define an area in the *GameScene.sks* that is level specific and load the level data into that area.
 
 ##Add a level node
 
@@ -19,7 +19,7 @@ This means your are not going to add the information about a level directly to y
 >
 > ![Add level node](../Tutorial-Images/xcode_spritekit_add_level_node.png)
 
-This node will be the container for the levels you will be loading later on. The actual loading mechanism will happen in code, you will we need to create a code connection to make the **levelNode** accessible from the *GameScene* class.
+This node will be the container for the levels you will be loading later on. The actual loading mechanism will happen in code, you will need to create a code connection to make the **levelNode** accessible from the *GameScene* class.
 
 You should be quite familiar with this process by now.
 
@@ -192,10 +192,10 @@ Now that the player can demolish a level, it also would be great for them to be 
 You will implement this much like we did for the **Main Menu** using the *MSButtonNode* class.  
 
 > [info]
-> If you finding yourself needing to create button graphics, I made the *restart.png* with aptly titled [Da Button Factory](http://dabuttonfactory.com/)
+> If you finding yourself needing to create button graphics, I made the *restart.png* with aptly titled [Da Button Factory](http://dabuttonfactory.com/).
 > If you find something even better, please share it.
 
-Let's add the restart button to the *GameScene*
+Let's add the restart button to the *GameScene*.
 
 > [action]
 > Open *GameScene.sks* and drag the *restart.png* onto stage. I would recommend putting it near the top left corner.
