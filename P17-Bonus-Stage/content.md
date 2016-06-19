@@ -39,7 +39,3 @@ What happens when you kill all of the seals? Nothing... Let's implement a level 
 
 > [challenge]
 > Implement a level mechanic and add at least 1 new level!
-
-# Summary
-
-Congratulations on completing the bonus stage!
