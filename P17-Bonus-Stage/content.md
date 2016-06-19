@@ -11,21 +11,21 @@ If you have any challenge suggestions, we would love to hear them.  Please feedb
 
 It would be a good idea to create a **new branch** in your repo for these challenges.
 
-#The challenge
+# The challenge
 
 The current game has no lives, you have infinite penguin ammo. There is no challenge...
 
 > [challenge]
 > Implement a game lives system? It might be nice to use the jumping penguins as the representation of these lives.
 
-#Scoring
+# Scoring
 
 There is no scoring element!
 
 > [challenge]
 > Add a scoring mechanism, you could assign score values to different objects. What about a high score?
 
-#Penguin properties
+# Penguin properties
 
 You have one type of penguin with fixed physics properties, how about a variety of penguins?
 
@@ -33,13 +33,13 @@ You have one type of penguin with fixed physics properties, how about a variety 
 > Can you create different types of penguins with different characteristics?
 > **Hint**: You don't need extra GFX, you can always change the color of a sprite, remember you are prototyping ideas.
 
-#More levels
+# More levels
 
 What happens when you kill all of the seals? Nothing... Let's implement a level mechanic and build some new level content.
 
 > [challenge]
 > Implement a level mechanic and add at least 1 new level!
 
-#Summary
+# Summary
 
 Congratulations on completing the bonus stage!
