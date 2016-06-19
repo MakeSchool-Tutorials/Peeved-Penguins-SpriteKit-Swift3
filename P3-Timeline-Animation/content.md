@@ -7,7 +7,7 @@ Let's learn how to create animations with SpriteKit's timeline. You are going to
 
 ![Bear preview](../Tutorial-Images/bear_inaction_preview.png)
 
-#Build a bear
+# Build a bear
 
 The bear will have it's own `.sks` file.
 
