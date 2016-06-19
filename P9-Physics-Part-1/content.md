@@ -38,7 +38,12 @@ Next you will remove the physics body from the catapult Arm as you will be learn
 
 There is sadly no support to visually create joints in the *GameScene* so you will have to code all of this. However, you can use the Scene Editor to create all of the physics bodies that will be connected.  Before you do this you need access to the **catapult** and **catapultArm**.
 
-You already have a code connection for the **catapultArm**, can you connect the **catapult** as well. Remember to set the *Name*, a sensible value would be `catapult`.
+You already have a code connection for the **catapultArm**, can you code connect the **catapult** as well?
+
+> [action]
+> Try and create a code connection for the `catapult`.
+>
+> Remember to set the *Name*, a sensible value would be `catapult`
 
 Next you are going to manually setup the *Physics Body* for the **catapultArm**.
 
@@ -129,6 +134,9 @@ Time to finally join these bodies together using a *SKPhysicsJointSpring*.
 /* Spring joint catapult arm and cantilever node */
 let catapultSpringJoint = SKPhysicsJointSpring.jointWithBodyA(catapultArm.physicsBody!, bodyB: cantileverNode.physicsBody!, anchorA: catapultArm.position + CGPoint(x:15, y:30), anchorB: cantileverNode.position)
 physicsWorld.addJoint(catapultSpringJoint)
+>
+/* Make this joint a bit more springy */
+catapultSpringJoint.frequency = 1.5
 ```
 >
 
@@ -166,7 +174,7 @@ The *touchNode* will require a code connection.
 > [action]
 > Please code connect the *touchNode* yourself.
 
-In case you want to double or triple check your code connections so far in this section:
+Let's double check the code connections so far in this section:
 
 > [action]
 > Ensure your *GameScene* class properties include:
