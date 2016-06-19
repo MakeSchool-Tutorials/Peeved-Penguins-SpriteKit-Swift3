@@ -5,7 +5,7 @@ slug: ipad-compatible
 
 SpriteKit allows you to adapt your game for the iPad without having to supply new assets and only requires making a few small changes.
 
-#iPad Tweaks
+# iPad Tweaks
 
 Try running your game on an iPad to see what happens...
 
