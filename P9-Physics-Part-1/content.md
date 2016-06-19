@@ -57,7 +57,7 @@ let catapultArmBody = SKPhysicsBody (texture: catapultArm!.texture!, size: catap
 /* Set mass, needs to be heavy enough to hit the penguin with solid force */
 catapultArmBody.mass = 0.5
 >
-/* No need for gravity otherwise the arm will fall over */
+/* Apply gravity to catapultArm */
 catapultArmBody.affectedByGravity = true
 >
 /* Improves physics collision handling of fast moving objects */
