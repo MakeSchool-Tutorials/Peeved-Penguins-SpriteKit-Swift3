@@ -198,7 +198,7 @@ touchNode = childNodeWithName("touchNode") as! SKSpriteNode
 
 ##Dynamic joints
 
-Next up you will be dynamically creating a spring joint whenever the player touches the catapult arm to initiate pulling back the catapult.  It needs to be accessible to your class when the player lets go of the catapult arm you need to destroy the joint, which in turn releases the catapult arm and sets everything in motion.
+Next up you will be dynamically creating a spring joint whenever the player touches the catapult arm to initiate pulling back the catapult. It needs to be accessible to your class so that when the player lets go of the catapult arm you can destroy the joint, which in turn releases the catapult arm and sets everything in motion.
 
 > [action]
 > Add this property to the *GameScene* class:
