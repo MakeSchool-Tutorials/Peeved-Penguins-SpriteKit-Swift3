@@ -39,3 +39,14 @@ What happens when you kill all of the seals? Nothing... Let's implement a level 
 
 > [challenge]
 > Implement a level mechanic and add at least 1 new level!
+
+# Catapult physics
+
+The catapult arm physics could be improved.
+
+> [challenge]
+> Can you create an improved physics shape in code to replace the catapult arm alpha mask. Use this shape to create a better bucket to hold the penguin.
+
+#Summary
+
+Congratulations on completing the bonus stage!
