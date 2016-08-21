@@ -1,11 +1,11 @@
 ---
-title: Working with contacts and collisions
+title: Physics contacts and collisions
 slug: physics-contact-collisions
 ---
 
 Next you'll learn how to setup the physics body *Contact Masks* and use that knowledge to remove seals when they are hit by penguins, ice blocks or even each other.
 
-#The Physics contact delegate
+# Contact delegate
 
 What you as developer need to do is to add *meaning* to different kinds of collisions. In the game a meaningful collision is one between a *seal* and any other object in the game.
 

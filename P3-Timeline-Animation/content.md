@@ -1,25 +1,25 @@
 ---
 title: Animate a character using the timeline
-slug: animating-spritekit
+slug: animating-character-timeline
 ---
 
-Let's learn how to create animations with SpriteKit's timeline. You are going to add a taunting animation to the bear that will sit behind our catapult:
+Let's learn how to create animations with SpriteKit's timeline. You are going to add a taunting animation to the polar bear that will sit behind the catapult:
 
 ![Bear preview](../Tutorial-Images/bear_inaction_preview.png)
 
 # Build a bear
 
-The bear will have it's own `.sks` file.
+The bear will need its own `.sks` file.
 
 > [action]
 > Create a new file called *Bear.sks* (`File > New > File`) in your project:
 >
-> ![Creating the SKS File](../Tutorial-Images/xcode_add_sks.png)
+> ![Creating the SKS File](../Tutorial-Images/xcode_generic_add_sks.png)
 
-You need to combine two images to make the bear, the body without an arm and a separate arm that will then be animated.
+You will need to combine two images to construct the bear, the body without an arm and a separate arm that will be animated with the timeline.
 
 > [action]
-> Select *Bear.sks* and `Zoom Out` the scene so you can see the yellow border.
+> Select *Bear.sks* and `Zoom Out` the scene so you can see the scene border.
 > Drag *bearnoarms.png* in from your *Media Library* to the scene, **snap** it to the bottom left corner of the scene.
 >
 > ![Adding the bear asset](../Tutorial-Images/xcode_spritekit_add_bearnoarm.png)
@@ -27,64 +27,76 @@ You need to combine two images to make the bear, the body without an arm and a s
 <!--  -->
 
 > [action]
-> Add *beararm.png* and set the *Anchor Point* to `(0,1)`, position it somewhere that looks sensible.
-> Set the *Z* to `1` to ensure the arm is always on top of the body.
+> Add *beararm.png* to the scene, then set the *Anchor Point* to `(0,1)`, position it somewhere that looks good.
+> Next in the *Scene Graph* view on the left hand side of the scene.  Drag the `arm` onto the `bear` so the `arm` is a child of the `bear`.
 >
 > ![Adding the bear arm asset](../Tutorial-Images/xcode_spritekit_add_bear_arm.png)
 
-You need to set the anchor point of the arm because we are going to rotate it. When you apply a rotation to a *SKNode* it will rotate around the anchor point - for the arm, this should ideally be somewhere near the shoulder, which in this case is the top left corner of the image.
+You needed to set the anchor point of the arm because you are going to rotate it. When you apply a rotation to a *SKNode* it will rotate around the *Anchor Point*, the default is `(0.5,0.5)` this means it will rotate around the center point.  Now for the arm, you want to rotate somewhere around the shoulder, which in this case is the `Top-left` corner of the arm.
 
-> [info]
->If you are wondering why the yellow scene size border is different than yours, I like to set the scene size to fit nicely around the content, so in this case I would set the scene to be the same size as the *Bear*.
-> It doesn't really matter for the bear as it's static content.  However, it does for other objects like the penguin which I will discuss later.
+## Scene size
 
-#Adding animation
-
-Now you can animate the polar bear's arm. In SpriteKit there is a default **Timeline** for adding animation actions.  However, you are going to use a more powerful feature and create shared animations, which are stored in a *SpriteKit Action* file, this gives you the power to reuse the custom animations you create with any node.
+You may have noticed the large scene border around the bear, seems a bit of a waste? Let's resize this to reflect the size of the bear.  It's important to set the scene size appropriately otherwise it can lead to unexpected placement issues. Let's correct this.
 
 > [action]
-> Click on *+* to add a new timeline and name it `ArmAnimation`, when prompted to create a new file name it `CharacterActions.sks`.
+> Select *Scene* in the *Scene Graph*, in the *Attributes inspector* set the *Size* to `Custom`, *W* to `80` and *H* to `78`.  You may recall this is the same *Size* as the bear asset.
+> If you resized and can't see the scene boundary, `Zoom-Out`.  
+> You may also need to reposition the bear back into the scene boundary.
+> ![Adjusting the beat scene size](../Tutorial-Images/xcode_spritekit_adjusting_bear_scene_size.png)
+
+> [info]
+> Notice that when you drag the bear, the arm also moves along as it's a child node and any movement to the parent node (bear) will affect any child nodes.
+
+# Animation timeline
+
+Now you are ready to animate the polar bear's arm. Let's take a look at the scene *Timeline*.
+
+> [action]
+> Ensure the *Timeline* is visible
+> ![Toggle timeline](../Tutorial-Images/xcode_spritekit_timeline_toggle.png)
+
+## Add a new action
+
+> Click on *+* to add a new timeline set *Name* to `ArmAnimation`, you will notice by default it will add this new animation to `Action.sks` the *SpriteKit Action File* included by the default game project.
 >
 > ![Adding the character action file](../Tutorial-Images/xcode_spritekit_add_action_sheet.png)
 >
+> `Open` *Actions.sks*, you will notice there are two actions.  The `ArmAnimation` you just added and one called `Pulse`.  Don't delete it, you might use it later :]
 
-##Adding actions to the timeline
+## Building the animation
 
-You will be animating the arm using two rotation actions, the first one will *rotate* the arm by `90` degrees and the second will *rotate* it back by `90` degrees.  Unfortunately SpriteKit doesn't allow you to easily preview this animation when building shared **timeline** actions.
-
-> [action]
-> You should be in *CharacterActions.sks*, expand *ArmAnimation* and locate the *Rotate* action in the *Object library*.
-> Drag this into the timeline, the default values of *Duration* `1` and *Degrees* `90` works well.
-> Drag another rotation in and set the *Degrees* to `-90`
->
-> ![Define the arm animation actions](../Tutorial-Images/xcode_spritekit_arm_animation_timeline.png)
->
-
-Congratulations! Let's try this out on the Bear.
-
-##Applying custom actions
+You will be animating the arm using two *Rotate Actions*, the first one will rotate the arm by `90` degrees and the second will rotate it back again by `90` degrees, creating a nice loop.
 
 > [action]
-> Open *Bear.sks*, have a look in your *Object Library* you should see your custom action `ArmAnimation`.
-> Drag this into the timeline for the arm, ensure the duration is `00:02` by dragging the edge of the action bar or set *Duration* to `2`
+> Drag a *Rotate Action* from the *Action Library* into the `ArmAnimation` action timeline. The default attributes will work just fine.
+> Drag a second *Rotate Action* into the timeline and set *Degrees* to `-90`.
+>
+> ![Building the arm animation](../Tutorial-Images/xcode_spritekit_build_armanimation.png)
+
+Congratulations! Let's see this animation in action!
+
+## Applying actions
+
+> [action]
+> `Open` *Bear.sks*, take a look in the *Object Library* you should see your custom action `ArmAnimation` near the bottom of the list.  Drag this action into the arm timeline.
 >
 > ![Add custom arm animation action to timeline](../Tutorial-Images/xcode_spritekit_timeline_add_arm_animation.png)
 >
-> Next you will want to ensure this animation loops forever, click on the **loop** symbol in the bottom-left of your **ArmAnimation** action and highlight the infinity symbol.
+> Next let's ensure this animation loops forever, `click` on the *Loop* button in the bottom-left of the **ArmAnimation** action and check the infinity symbol.
 >
 > ![Loop arm animation action](../Tutorial-Images/xcode_spritekit_timeline_arm_animation_loop.png)
 >
 
-Great job, time to press *Animate* at the top of the timeline editor and your bear should hopefully look like this:
+Great job, press *Animate* at the top of the timeline editor and your bear should hopefully look like this:
 
-![Bear arm animation](../Tutorial-Images/bear_arm.gif)
+![Bear arm animation](../Tutorial-Images/animated_bear_arm.gif)
 
-#Summary
+# Summary
 
 You've learnt to:
 
 - Create a new SpriteKit Scene for the bear
-- Create a custom `ArmAnimation` action in a shared SpriteKit Action file
+- Create a custom `ArmAnimation` action in a SpriteKit Action file
 - Apply your custom action to the bear timeline
 
 In the next chapter you will be creating more game objects, ready for use in the game.
