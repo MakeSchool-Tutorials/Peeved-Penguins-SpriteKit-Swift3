@@ -15,7 +15,7 @@ This means you are not going to hard code a level directly into your *GameScene.
 ## Level node
 
 > [action]
-> Drag an *Empty Node* into the stage, set *Position* to `(190,-113)``
+> Drag an *Empty Node* into the stage, set *Position* to `(190,-111)``
 > ![Add level node](../Tutorial-Images/xcode_spritekit_add_level_node.png)
 
 This node will be the container for the level you will be creating. The actual loading mechanic will happen in code, you will need to create a code connection to this node to make it accessible to the *GameScene* class.
@@ -137,9 +137,10 @@ First up you need to have a target for the camera to follow, this would be the p
 /* Tracking helpers */
 var trackerNode: SKNode? {
   didSet {
-    /* Reset camera, set tracker */
-    camera?.position.x = trackerNode!.position.x
-    lastTrackerPosition = trackerNode!.position
+      if let trackerNode = trackerNode {
+          /* Set tracker */
+          lastTrackerPosition = trackerNode.position
+      }
   }
 }
 var lastTrackerPosition = CGPoint(x: 0, y: 0)

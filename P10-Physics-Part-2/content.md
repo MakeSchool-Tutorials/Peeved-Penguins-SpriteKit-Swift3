@@ -53,7 +53,7 @@ Next you need to remove the *penguinJoint* once the player removes their touch.
 > Can you remove the *penguinJoint*?
 
 > [solution]
-> Add the following to the `touchesEnded(...)` method:
+> Add the following to the`touchesEnded(...)` method:
 >
 ```
 if let penguinJoint = penguinJoint {
@@ -62,7 +62,7 @@ if let penguinJoint = penguinJoint {
 ```
 >
 
-Run the game... Launch a couple of penguins! Hurray!
+Run the game... You should be able to launch some penguins, good job!
 
 # Fine Tuning
 
