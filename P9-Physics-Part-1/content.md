@@ -3,13 +3,11 @@ title: Catapult physics
 slug: physics-catapult
 ---
 
-Now things are going to get real. You are going to implement a physics based shooting mechanic. First let's get started with a short introduction to some of the physics objects you will be using.
+Now things are going to get real :] You will implement an improved physics catapult mechanic. Let's get started with a short introduction to the type of physics objects you will be using.
 
-#Physics joints
+# Physics joints
 
-In this step you're going to turn the catapult and the catapult arm into physic objects. Unlike the other physics objects you have in our game at the moment, the catapult consists of two parts that you will want to join.  Two physics objects can be connected to each other using joints.
-
-Don't understand why you need joints yet? Let's try it out.
+You're going to add physics bodies to the catapult and the catapult arm. Unlike the other physics objects you have in your game at the moment, the catapult consists of two parts that you will need to join together.  Physics objects can be connected to each other using joints. There are a handful of joint types each with its own set of physics rules.
 
 > [action]
 > Open *GameScene.sks* and enable physics on the **catapult** and **catapultArm** . Set *Body Type* to `Alpha mask`.
@@ -17,48 +15,51 @@ Don't understand why you need joints yet? Let's try it out.
 
 Run your game...
 
-![Broken catapult](../Tutorial-Images/screenshot_broken_catapult.png)
+![Animated collapse](../Tutorial-Images/animated_collapse.gif)
 
-The catapult falls apart because you're not using joints to keep it connected!
+The catapult falls apart because they're not connected together.  Joints will allow you to create that connection.
 
-#Getting the physics bodies ready
+## Body setup
 
-Let's revise the physics bodies.
+Let's revise the catapult physics bodies.
 
 > [action]
 > Select the *catapult* (Not the Arm)
-> Uncheck -`Dynamic`, `Allows Rotation` and `Affected By Gravity`.
+> Uncheck -`Dynamic`, this makes the catapult body a static body.
 
-Next you will remove the physics body from the catapult Arm as you will be learning how to implement a physics body in code.
+Next you will remove the physics body from the *catapultArm* as you will be learning how to setup a physics body in code.
 
 > [action]
 > Select the *catapultArm*
-> Set *Body Type* to `None` to remove physics.
+> Set *Body Type* to `None` to remove the physics body.
 >
 
-There is sadly no support to visually create joints in the *GameScene* so you will have to code all of this. However, you can use the Scene Editor to create all of the physics bodies that will be connected.  Before you do this you need access to the **catapult** and **catapultArm**.
+There is sadly no support to visually create joints yet in SpriteKit, so you will have to get your hands dirty and code this yourself. However, you can use the Scene Editor to create all of the physics bodies that will be used with the joints.  Before you do this you need access to both the **catapult** and **catapultArm** in code.
 
-You already have a code connection for the **catapultArm**, can you code connect the **catapult** as well?
+You already have a code connection for the **catapultArm**.
+
+> [challenge]
+> Can you code connect the *catapult*?
+
+<!-- -->
+
+> [solution]
+> You can do this, look at the *catapultArm* code :]
+
+Next you are going to manually initialize the *Physics Body* for the *catapultArm*.
 
 > [action]
-> Try and create a code connection for the `catapult`.
->
-> Remember to set the *Name*, a sensible value would be `catapult`
-
-Next you are going to manually setup the *Physics Body* for the **catapultArm**.
-
-> [action]
-> Add the following to `didMoveToView(...)` after the level loading code.
+> Add this code to the end of `didMove(...)`
 >
 ```
-/* Create catapult arm physics body of type alpha */
+/* Initialize catapult arm physics body of type alpha */
 let catapultArmBody = SKPhysicsBody (texture: catapultArm!.texture!, size: catapultArm.size)
 >
-/* Set mass, needs to be heavy enough to hit the penguin with solid force */
+/* Mass needs to be heavy enough to hit the penguin with sufficient force */
 catapultArmBody.mass = 0.5
 >
-/* Apply gravity to catapultArm */
-catapultArmBody.affectedByGravity = true
+/* No need for gravity otherwise the arm will fall over */
+catapultArmBody.affectedByGravity = false
 >
 /* Improves physics collision handling of fast moving objects */
 catapultArmBody.usesPreciseCollisionDetection = true
@@ -74,110 +75,101 @@ catapultArm.physicsBody = catapultArmBody
 > *Remember* Apple documentation is your friend, if you are unsure of anything, highlight the method or property in question and look at the *Quick Help* description.
 >
 
-Run your game... The **catapultArm** simply falls over :[
-
-#Your first joint
+## Pin joint
 
 Now time to create your first joint, you will be using *SKPhysicsJointPin* to connect the **catapult** and **catapultArm** together.
 
 > [action]
-> Add the following to the end of your `didMoveToView(...)` method:
+> Add the following to the end of your `didMove(...)` method:
 >
 ```
 /* Pin joint catapult and catapult arm */
-let catapultPinJoint = SKPhysicsJointPin.jointWithBodyA(catapult.physicsBody!, bodyB: catapultArm.physicsBody!, anchor: CGPoint(x:220 ,y:105))
-physicsWorld.addJoint(catapultPinJoint)
+let catapultPinJoint = SKPhysicsJointPin.joint(withBodyA: catapult.physicsBody!, bodyB: catapultArm.physicsBody!, anchor: CGPoint(x:210 ,y:104))
+physicsWorld.add(catapultPinJoint)
 ```
 >
 
-The *anchor* is relative to scene, so you need to find the **position** in scene space of the ideal pivot point on the catapult. An easy way to do this is add a temp sprite to the scene and move it to the position you want to anchor on, use that position value and then remove the temp sprite from the scene.
+The *anchor* is relative to scene node, so you need to find the **position** in scene node for the pivot point on the catapult. An easy way to do this is add a *Color Sprite* to the scene and move it to the position you want to anchor on.  Make a note of the position value, set the value in code and then remove the *Color Sprite* from the scene.
 
-Now you have set up your first joint! Run the game...  
+Congratulations, you just added your first physics pin joint!
 
-The **catapultArm** should gracefully fall over while pinned to the catapult, although if you touch the screen, launching penguins is now rather odd :]
+# Catapult spring
 
-##Springing into action
+You need a joint that will simulate the action of a catapult launch, allowing the player to pull back on the catapult bucket and then **spring** forward, launching any projectiles that are in the bucket.
 
-You need a joint that will simulate the action of a catapult, allowing the player to pull back on the bucket and launch **spring** forward.
+Having a look at the joint documentation, *SKPhysicsJointSpring* sounds like it would be ideal for this job. The spring length is extended by pulling back on the catapultArm, the further back the joint is pulled. The greater the energy that will be unleashed when the joint is released. This energy will drive the **catapultArm** forward.
 
-*SKPhysicsJointSpring* sounds like it was made for this job, as the spring length is extended by pulling back on the catapultArm the more force will be required to bring the bodies back together, when released the spring joint will snap the **catapultArm** back quickly.
+Before you setup this joint, it's important to note that joints always require two physics bodies.  In this instance you don't have another physics body to connect to.
 
-Before you setup this joint, it's important to note that joints always require two bodies.  In this case you don't have another body to connect to. There is a solution...
+There is a solution...
 
-It's common practice to create invisible static physics bodies to serve this purpose, you can use Scene Editor to create an invisible color sprite and set it up with a static physics body.  This will then be used to provide the second body for the joint.
+It's common practice to create invisible static physics bodies to serve this purpose, you can use Scene Editor to create an invisible *Color Sprite* and set up a static physics body.  This will be used to provide the second body for the joint in question.
 
 > [action]
 > Drag a *Color Sprite* onto the stage and place it above the catapult arm.
-> Set *Name* to `cantileverNode` (check fancy catapult design terminology) :]
-> Although you don't want this sprite to be visible to the player, for now just adjust the *Size* to `(25,25)` and leave it visible it's easier for you to work and debug with.
->
-![Cantilever Node](../Tutorial-Images/xcode_spritekit_add_cantilever_node.png)
->
-Ensure this node's physic body is static by `unchecking` *Dynamic*.
->
-![Static Body](../Tutorial-Images/xcode_spritekit_static.png)
->
-> It's important that this node does not collide with any other physics objects, you wouldn't want the penguin to accidentally hit this invisible node and fall to the ground.  Even if a node is visually invisible, the physics body is still part of the physics simulation and will react to collisions, unless setup otherwise.
-> Set both *Category Mask* and *Collison Mask* to `0`.
+> Set *Name* to `cantileverNode` (fancy catapult design terminology) :]
+> Set *Size* to `(25,25)`.
+> Set *Body type* to `Bounding rectangle`, uncheck the *Dynamic* box.
+> ![Cantilever Node](../Tutorial-Images/xcode_spritekit_add_cantilever_node.png)
 
-Next you need to add a code connection for this node.
+This sets up the static physics body nicely.  However, there is an issue, by default this physics body will collide with everything in the game world.  If you recall setting up the goal sensor in the Hoppy Bunny tutorial, you can use the *Physics Masks* to remove the body from colliding.
 
-> [action]
-> Please add a code connection for the `cantileverNode` yourself.
+> Set the *Category Mask* to `0`.
+
+You will need to add a code connection for this node.
+
+> [challenge]
+> Add a code connect for the `cantileverNode` in *GameScene.swift*.
+
+## Spring joint
 
 Time to finally join these bodies together using a *SKPhysicsJointSpring*.
 
 > [action]
-> Add the following code after the first pin joint setup in `didMoveToView(...)`
+> Append the following to `didMove(...)`
 >
 ```
 /* Spring joint catapult arm and cantilever node */
-let catapultSpringJoint = SKPhysicsJointSpring.jointWithBodyA(catapultArm.physicsBody!, bodyB: cantileverNode.physicsBody!, anchorA: catapultArm.position + CGPoint(x:15, y:30), anchorB: cantileverNode.position)
-physicsWorld.addJoint(catapultSpringJoint)
+let catapultSpringJoint = SKPhysicsJointSpring.joint(withBodyA: catapultArm.physicsBody!, bodyB: cantileverNode.physicsBody!, anchorA: catapultArm.position + CGPoint(x:15, y:30), anchorB: cantileverNode.position)
+physicsWorld.add(catapultSpringJoint)
 >
 /* Make this joint a bit more springy */
 catapultSpringJoint.frequency = 1.5
 ```
 >
 
-Run your game... The **catapultArm** should be standing to attention.
-
-![Screenshot cantileverNode](../Tutorial-Images/screenshot_cantilever_node.png)
-
-**Notice:** the faint blue lines showing the connection between our two bodies? This is because we added the physics debug flag when launching the *GameScene*, this is really handy when developing more complex physics models.
-
-#Pulling the catapult arm
+# Pulling the catapult arm
 
 Great, you have a **catapultArm** with a spring joint attached to the static **cantileverNode**.  
-How will the player pull the **catapultArm** back to create this force in the spring joint ready to be unleashed upon the penguin?
+How will the player pull the **catapultArm** back to create the energy in the spring joint ready to be unleashed upon the penguin?
 
-##Dragging concept
+## Dragging concept
 
 Here's a short outline of what you are going to do:
 
-- If the player starts touching the **catapultArm**, you will create a **springJoint** between a **touchNode** and the **catapultArm**
-- Whenever the touch moves, you update the position of the **touchNode**
-- When the touch ends you destroy the joint between the **touchNode** and the **catapultArm** so the **catapultArm** snaps back to it's original position and fires the penguin into the air
+- When the player touches the **catapultArm**, create a **springJoint** between a dynamic **touchNode** and the **catapultArm**
+- Whenever the touch moves, update the position of the **touchNode**
+- When the touch ends, destroy the joint between the **touchNode** and the **catapultArm** so the **catapultArm** snaps back to it's original position and launches the penguin into the air
 
-It's often easier to understand when you see physics in action, there's a lot going on here so make sure you pay extra attention. As I'm sure you already were :]
+It's often easier to understand when you see physics in action, there's a lot going on here so make sure you pay attention. As I'm sure you already are :]
 
-##Adding the touchNode
+## Add the touch node
 
 > [action]
-The quickest way to create the *touchNode* is to *Copy* & *Paste* the **cantileverNode** and rename it to **touchNode** and place it behind the catapult arm.
+> The easiest way to create the *touchNode* is to *Copy* & *Paste* the *cantileverNode*, rename it to `touchNode` and place it behind the catapult arm.
 >
 > ![Adding the touchNode](../Tutorial-Images/xcode_spritekit_add_touch_node.png)
 >
 
 The *touchNode* will require a code connection.
 
-> [action]
-> Please code connect the *touchNode* yourself.
+> [challenge]
+> Code connect the *touchNode*.
 
-Let's double check the code connections so far in this section:
+Just in case, let's double check the code connections so far in this section:
 
 > [action]
-> Ensure your *GameScene* class properties include:
+> You should have these properties in *GameScene.swift*
 >
 ```
 var catapultArm: SKSpriteNode!
@@ -186,19 +178,19 @@ var cantileverNode: SKSpriteNode!
 var touchNode: SKSpriteNode!
 ```
 >
-> Check the subsequent code connections in `didMoveToView(...)`:
+> And the subsequent code connections in `didMove(...)`:
 >
 ```
-catapultArm = childNodeWithName("catapultArm") as! SKSpriteNode
-catapult = childNodeWithName("catapult") as! SKSpriteNode
-cantileverNode = childNodeWithName("cantileverNode") as! SKSpriteNode
-touchNode = childNodeWithName("touchNode") as! SKSpriteNode
+catapultArm = childNode(withName: "catapultArm") as! SKSpriteNode
+catapult = childNode(withName: "catapult") as! SKSpriteNode
+cantileverNode = childNode(withName: "cantileverNode") as! SKSpriteNode
+touchNode = childNode(withName: "touchNode") as! SKSpriteNode
 ```
 >
 
-##Dynamic joints
+## Dynamic joints
 
-Next up you will be dynamically creating a spring joint whenever the player touches the catapult arm to initiate pulling back the catapult. It needs to be accessible to your class so that when the player lets go of the catapult arm you can destroy the joint, which in turn releases the catapult arm and sets everything in motion.
+Next you will be dynamically creating a spring joint whenever the player touches the catapult arm to initiate pulling back the catapult. It needs to be accessible to your class so that when the player lets go of the catapult arm you can destroy the joint, which in turn releases the catapult arm and sets everything in motion.
 
 > [action]
 > Add this property to the *GameScene* class:
@@ -209,99 +201,94 @@ var touchJoint: SKPhysicsJointSpring?
 ```
 >
 
-While you are focusing on modeling the catapult physics, let's park the penguin launching code for later.
+# Touch control
 
-#Touch control
+Next you will work on the touch mechanic and implement the following:
+
+- Touch detection on the catapult arm
+- Creating a spring joint between a static body and the catapult arm
+- Moving the static body as the player moves their finger, to pull back the catapult arm
+- Releasing the spring joint when the player removes their finger
 
 > [action]
-> Replace the existing `touchBegan(...)` method with:
+> Replace the code in `touchesBegan(...)` with:
 >
 ```
-override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    /* Called when a touch begins */
->    
-    /* There will only be one touch as multi touch is not enabled by default */
-    for touch in touches {
->        
-        /* Grab scene position of touch */
-        let location    = touch.locationInNode(self)
->        
-        /* Get node reference if we're touching a node */
-        let touchedNode = nodeAtPoint(location)
->        
-        /* Is it the catapult arm? */
-        if touchedNode.name == "catapultArm" {
->            
-            /* Reset touch node position */
-            touchNode.position = location
->            
-            /* Spring joint touch node and catapult arm */
-            touchJoint = SKPhysicsJointSpring.jointWithBodyA(touchNode.physicsBody!, bodyB: catapultArm.physicsBody!, anchorA: location, anchorB: location)
-            physicsWorld.addJoint(touchJoint!)
->            
-        }
-    }
+/* There will only be one touch as multi touch is not enabled by default */
+for touch in touches {
+>
+   /* Grab scene position of touch */
+   let location    = touch.location(in: self)
+>   
+   /* Get node reference if we're touching a node */
+   let touchedNode = atPoint(location)
+>   
+   /* Is it the catapult arm? */
+   if touchedNode.name == "catapultArm" {
+>       
+       /* Reset touch node position */
+       touchNode.position = location
+>       
+       /* Spring joint touch node and catapult arm */
+       touchJoint = SKPhysicsJointSpring.joint(withBodyA: touchNode.physicsBody!, bodyB: catapultArm.physicsBody!, anchorA: location, anchorB: location)
+       physicsWorld.add(touchJoint!)
+>
+   }
 }
 ```
 >
 
-When the player touches the screen, the **touchNode** will be set the touch position and the *SKPhysicsJointSpring* will be created between the **touchNode** and the **catapultArm** to create the pullback mechanic.
+When the player touches the screen, the **touchNode** will be set to the touch location position and a *SKPhysicsJointSpring* will be added, joining the **touchNode** and the **catapultArm** to implement the first step in the pullback mechanic.
 
-Run your game...
+## Pull back
 
-The **touchNode** should move to the position the player touches.  However, the player can't pull back the catapult just yet.
-
-##Lean back
-
-To pull the catapult arm you need the **touchNode** to track the player's touch.  You can add this by implementing the *touchedMoved* method.
+To pull the catapult arm you need the **touchNode** to follow the player's touch.  You can implement this in the *touchesMoved* method.
 
 > [action]
-> Add the following method to the *GameScene* class:
+> Add the `touchesMoved` method to the *GameScene* class:
 >
 ```
-override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    /* Called when a touch moved */
->    
-    /* There will only be one touch as multi touch is not enabled by default */
-    for touch in touches {
->        
+override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+  /* Called when a touch moved */
+>
+  /* There will only be one touch as multi touch is not enabled by default */
+  for touch in touches {
+>      
       /* Grab scene position of touch and update touchNode position */
-      let location       = touch.locationInNode(self)
+      let location       = touch.location(in: self)
       touchNode.position = location
->        
-    }
+>      
+  }
 }
 ```
 >
 
-Great you can now pull back the catapult, there is one last step required to 'spring it to life'.  Once the player releases their touch, you need to sever the **touchJoint**.  This will release the joint holding the catapult arm and **touchNode**, allowing the forced stored in the **cantileverNode** spring joint to exert its force.
+Run the game... You can now touch the catapult arm and pull it back.
 
-##Let it go
+## Let it go
 
-To facilitate this joint removal you will be implementing the *touchesEnded* method.
+There is one last step required, when the player releases their touch, you need to remove the **touchJoint**.  This will release the joint coupling the catapult arm and **touchNode**, in turn allowing the energy stored in the **cantileverNode** spring joint to be released and the arm spring forward.
 
 > [action]
-> Add this method to your *GameScene* class
+> Add the `touchesEnded` method to your *GameScene* class
 >
 ```
-override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    /* Called when a touch ended */
->        
-    /* Let it fly!, remove joints used in catapult launch */
-    if let touchJoint = touchJoint { physicsWorld.removeJoint(touchJoint) }
+override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+  /* Called when a touch ended */
+>
+  /* Let it fly!, remove joints used in catapult launch */
+  if let touchJoint = touchJoint {
+    physicsWorld.remove(touchJoint)
+  }
 }
 ```
 >
 
-Run your game... You should have a working catapult model, a massive improvement on the original launcher :]
+Run your game... You should have a working physics based catapult model, a great improvement on your first launcher design.
 
 ![Catapult 2.0](../Tutorial-Images/animated_catapult_2.0.gif)
 
-> [info]
-> It's important to run physics based games on device, simulator performance can be bad and this will really affect the physics simulation. So always test on device (if you can).
->
-
-#Summary
+# Summary
 
 Great! Now you are really close to completing the shooting mechanism. You've covered a lot of ground here, don't worry if you don't 'get it' straight away.  The best way to get more familiar with game physics is to experiment, experiment, experiment.
 

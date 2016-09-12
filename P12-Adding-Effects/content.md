@@ -3,14 +3,14 @@ title: Adding effects
 slug: adding-effect
 ---
 
-The game is looking good, it would be nice to start adding those little extra touches to enhance the game experience.  You are going to be adding both a particle effect and sound effect whenever a seal gets eliminated. SpriteKit has a great integrated particle effect designer which we are going to use to define the style of our first particle effect.
+The game is looking good, it would be nice to start adding those little extra touches to enhance the game experience.  You are going to be adding both a particle effect and sound effect whenever a seal gets destroyed. SpriteKit has a great integrated particle effect designer which you are going to use to define the style of your first particle effect.
 
-#Creating a new particle effect
+# Build a particle
 
 > [action]
 > Create a new particle effect `File > New > File > SpriteKit Particle File`
 >
-> *Save as* `SealExplosion`
+> Set *Name* to `SealExplosion`
 > ![SpriteKit Particle File](../Tutorial-Images/xcode_spritekit_add_particle.png)
 >
 > ![SpriteKit Particle File](../Tutorial-Images/xcode_spritekit_add_particle_template.png)
@@ -36,7 +36,7 @@ This should look something like that:
 
 Feel free to spend some time playing around with different values.
 
-##Adding the particle effect to our collision
+## Particle effect in code
 
 Let's add some code that adds the particle effect to the scene whenever a seal gets eliminated.
 
@@ -47,8 +47,8 @@ Let's add some code that adds the particle effect to the scene whenever a seal g
 /* Load our particle effect */
 let particles = SKEmitterNode(fileNamed: "SealExplosion")!
 >
-/* Convert node location (currently inside Level 1, to scene space) */
-particles.position = convertPoint(node.position, fromNode: node)
+/* Convert node location (currently inside LevelHolder, to scene space) */
+particles.position = convert(node.position, from: node)
 >
 /* Restrict total particles to reduce runtime of particle */
 particles.numParticlesToEmit = 25
@@ -58,17 +58,26 @@ addChild(particles)
 ```
 >
 
-You load a particle effect and place it at the seals's position directly before the seal is removed from the scene. The runtime of the particle can be controlled by setting the *numParticlesToEmit*, it's not super logical so it takes a bit of trial and error to get a value that looks and feels right.
+You load in a particle effect and place it at the seals's position directly before the seal is removed from the scene. The runtime of the particle can be controlled by adjusting the *numParticlesToEmit*, it takes a bit of trial and error to get a value that looks right.
 
-#Adding SFX
+> [info]
+> You can drag the *SealExplosion.sks* into the *GameScene.sks* to see what it looks like in-game, just hit *Animate*.
+
+# Add SFX
 
 Adding sound effects is quite straight forward in SpriteKit, you can make use of the `playSoundFileNamed` *SKAction* to play sounds.
 
-Download the [SFX Pack](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/SFX.zip) we created for you. Once the download is complete, unpack the folder and add
-to the project.
+> [action]
+> Download our [SFX Pack](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/SFX.zip)
+> Once the download is complete, unpack the folder and add it to the project.
+> Ensure *Copy items if needed* is checked.
+> ![SFX Added](../Tutorial-Images/xcode_project_sfx_added.png)
+> **Note:** Although this SFX is an **asset** it's a not a graphic asset so don't put it in the *assets.atlas* folder.
+
+<!-- -->
 
 > [action]
-> Add the following to the `dieSeal` method:
+> Add this code after the particle code in the `dieSeal` method:
 >
 ```
 /* Play SFX */
@@ -77,7 +86,10 @@ self.runAction(sealSFX)
 ```
 >
 
-Run the game... Let there be sound!
+Run the game... Bask in the majestic.... Moos? .... of the seal :]
+
+> [challenge]
+> Find better SFX.
 
 #Summary
 

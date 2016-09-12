@@ -3,19 +3,19 @@ title: Make it iPad compatible
 slug: ipad-compatible
 ---
 
-SpriteKit allows you to adapt your game for the iPad without having to supply new assets and only requires making a few small changes.
+SpriteKit allows you to adapt your game for the iPad without having to supply new assets and only requires making a few small tweaks.
 
-# iPad Tweaks
+# iPad tweaks
 
 Try running your game on an iPad to see what happens...
 
-You will most likely notice the following:
+You will notice the following:
 
-- The main menu is useable, although it looks zoomed in.
-- The main game is unplayable.
-- It's probably running in portrait mode!
+- The game view is zoomed in
+- It's unplayable
+- It's running in portrait mode.
 
-Let's fix the orientation issue first, as this game should only ever be ran in landscape.
+Let's fix the orientation issue first, as this game was designed for landscape.
 
 > [action]
 > Open *info.plist* and expand the list at the bottom.
@@ -23,39 +23,25 @@ Let's fix the orientation issue first, as this game should only ever be ran in l
 >
 > ![Xcode plist](../Tutorial-Images/xcode_info_plist.png)
 
-Run your game again, it should be landscape only now.
+Run your game... It should now run in landscape mode.
 
-##Aspect
+## Scale mode
 
-Currently you are using a scene *scaleMode* or `.AspectFill` which looks great on the iPhone.  However, for the iPad you can't see all of the game content.  Let's try another scale mode.
+Currently you are using a scene *scaleMode* or `.aspectFill` which looks great on the iPhone.  However, for the iPad you can't see all of the game content.  Let's try another scale mode, `.aspectFit` will stretch the view to fit the device while using the aspect ratio of the device.
 
 > [action]
-> Switch to the *Find Navigator* tab and search for `AspectFill`
+> Switch to the *Find Navigator* tab and search for `aspectFill`
 >
 > ![Search](../Tutorial-Images/xcode_project_search.png)
 >
-> Replace all results of `.AspectFill` with `.AspectFit`
+> Replace all results of `.aspectFill` with `.aspectFit`
 >
 
 Run your game...
 
-Looking better, the only minor point is the letterbox effect.  However, this is more than acceptable for the minimal amount of work required to achieve this compatibility.  Some games simply add a decoration border to fill this space.
+Looking better, the only side effect is the letterbox effect.  However, I feel this is more than acceptable for the trivial amount of work required to achieve this compatibility.
 
-Yet the *GameScene* does not look quite right.
-
-![iPad Broken](../Tutorial-Images/screenshot_ipad_broken.png)
-
-Oh so close...
-
-This is actually an easy fix, it helps if all nodes are centered correctly.
-
-
-> [action]
-> Open *GameScene.sks*, select the scene and set *Anchor point* to `(0.5,0.5)`
-
-Run your game... YES! :]
-
-#Summary
+# Summary
 
 Congrats on finishing *Peeved Penguins*, give yourself or the person next to you a high five.
 

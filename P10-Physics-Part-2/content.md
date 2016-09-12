@@ -17,7 +17,7 @@ var penguinJoint: SKPhysicsJointPin?
 ```
 >
 
-When the player touch begins, you want to spawn a penguin and then pin it to the bucket area of the catapult arm.
+When the player touch begins, you want to spawn a penguin and pin it to the bucket area of the catapult arm.
 
 > [action]
 > Add this code to the `touchesBegan(...)` method immediately after the **touchJoint** code:
@@ -43,43 +43,38 @@ cameraTarget = penguin.avatar
 ```
 >
 
-Most of this should be fairly easy to understand for you by now.  The code is very similar to the original beta launcher.  The manual impulse has been removed and replaced with create a pin joint between the penguin and the catapult arm.  This joint will be maintained until the player releases their touch.
+Most of this should be fairly easy to understand for you by now.  The code is very similar to the original beta launcher.  The manual impulse has been removed and replaced with create a pin joint between the penguin and the catapult arm.
 
-##Let it go
+## Let it go
 
-As in the previous chapter, you need to release the *penguinJoint* when the player releases their touch.
+Next you need to remove the *penguinJoint* once the player removes their touch.
 
-Can you add this joint removal yourself?
+> [challenge]
+> Can you remove the *penguinJoint*?
 
 > [solution]
-> Add the following to the `touchesEnded(...)` method:
+> Add the following to the`touchesEnded(...)` method:
 >
 ```
-if let penguinJoint = penguinJoint { physicsWorld.removeJoint(penguinJoint) }
+if let penguinJoint = penguinJoint {
+  physicsWorld.remove(penguinJoint)
+}
 ```
 >
 
-#Tuning
+Run the game... You should be able to launch some penguins, good job!
 
-Now run the game and launch a couple of penguins! It's very important that everything feels right for the player.
-Tuning your physics simulation is very important, what might be realistic may not be much fun.  You're aiming to get that balance just right and hit the sweet spot.
+# Fine Tuning
+
+It's very important that everything feels right for the player.
+
+Tuning your physics simulation is very important, what might be realistic in the real world. May not be much fun in a game.  You're aiming to get the balance just right and hit the sweet spot.
 
 SpriteKit makes it very easy to change different physics properties, such as mass, friction, etc:
 
-Let's try a tweak on our catapult, if you notice when the game starts the catapult looks like it's swinging in the breeze.  You can apply an easy tweak to make this look better.  
+Have a play with your physics objects, sometimes the best results come from accidental changes.
 
-Let's remove gravity on the catapultArm, this will stop the see-saw effect.
-
-> [action]
-> Change this body property to:
-```
-catapultArmBody.affectedByGravity = false
-```
->
-
-Run your game... Looking tight.
-
-#Summary
+# Summary
 
 Well done! You have the first fully playable prototype build.
 
