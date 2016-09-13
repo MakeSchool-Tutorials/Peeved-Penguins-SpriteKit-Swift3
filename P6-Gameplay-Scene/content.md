@@ -52,7 +52,7 @@ Before modeling the final catapult physics, you are going to implement a simple 
 
 > [info]
 > SpriteKit doesn't include any handy vector maths libraries out of the box, thankfully the internet tends provide :]
-> There is a handy collection of helper classes and functions called [SKTUtils](https://github.com/raywenderlich/SKTUtils), we've updated these to the latest Xcode so please [Download SKTUtils.zip](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/SKTUtils.zip), unzip it and add it into to your project.
+> There is a handy collection of helper classes and functions called [SKTUtils](https://github.com/raywenderlich/SKTUtils), we've updated these to the latest Xcode so please [Download SKTUtils.zip](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift3/raw/master/SKTUtils.zip), unzip it and add it into to your project.
 > ![Copy if needed](../Tutorial-Images/xcode_copy_needed.png)
 >
 
@@ -80,8 +80,7 @@ class GameScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 >        
         /* Add a new penguin to the scene */
-        let resourcePath = Bundle.main.path(forResource: "Penguin", ofType: "sks")
-        let penguin = MSReferenceNode (url: URL (fileURLWithPath: resourcePath!))
+        let penguin = MSReferenceNode(fileNamed: "Penguin")
         addChild(penguin)
 >        
         /* Move penguin to the catapult bucket area */
