@@ -86,7 +86,7 @@ levelHolder = childNode(withName: "levelHolder")
 
 <!-- -->
 
-> To load your level scene into the *GameScene*, add the following to the end of `didMoveToView(...)`:
+> To load your level scene into the *GameScene*, add the following to the end of `didMove(to:)`:
 >
 ```
 /* Load Level 1 */
