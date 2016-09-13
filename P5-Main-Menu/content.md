@@ -26,7 +26,7 @@ The main menu needs a play button to trigger the player's transition to the *Gam
 SpriteKit does not provide any native button nodes, so you need to roll your own.  You may recall
 the *MSButtonNode* class we provided in the *Hoppy Bunny* tutorial.  If you took on the challenge to build a better button please show it off and add to your project.
 
-If you need the original button, please [Download MSButtonNode.swift](https://raw.githubusercontent.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift-Solution/master/PeevedPenguinBuild/MSButtonNode.swift) and drag the file into your project, ensuring *Copy items if needed* is checked.
+If you need the original button, please [Download MSButtonNode.swift](https://raw.githubusercontent.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift3-Solution/master/PeevedPenguins/MSButtonNode.swift) and drag the file into your project, ensuring *Copy items if needed* is checked.
 
 
 > [action]
@@ -60,7 +60,7 @@ class MainMenuScene: SKScene {
         buttonPlay = self.childNode(withName: "buttonPlay") as! MSButtonNode
 >        
         /* Setup button selection handler */
-        buttonPlay.selectedHandler = {
+        buttonPlay.selectedHandler = { [unowned self] in
 >            
             if let view = self.view {
 >                

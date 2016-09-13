@@ -242,7 +242,7 @@ buttonRestart = childNode(withName: "//buttonRestart") as! MSButtonNode
 >
 ```
 /* Setup button selection handler */
-buttonRestart.selectedHandler = {
+buttonRestart.selectedHandler = { [unowned self] in
 >
   if let view = self.view {
 >      
