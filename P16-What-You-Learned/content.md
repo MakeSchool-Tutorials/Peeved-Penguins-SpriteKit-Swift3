@@ -51,7 +51,7 @@ Let's take a look at what you have learned.
 
 #Solution
 
-[Download Peeved Penguins](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift-Solution).
+Download the [Peeved Penguins solution](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift3-Solution/archive/master.zip).
 
 ![Github Cat](https://static.makegameswith.us/gamernews_images/TVZ2mTmQpl/labtocat.png)
 
